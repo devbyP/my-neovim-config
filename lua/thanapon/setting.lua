@@ -7,6 +7,7 @@ local opt = vim.opt
 o.timeoutlen = 500
 o.updatetime = 200
 
+
 -- Better editor UI
 -- Line number
 o.number = true
