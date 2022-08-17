@@ -22,9 +22,17 @@ map('n', '<C-k>', ':move .-2<CR>')
 map('x', '<C-j>', ":move '>+1<CR>gv=gv")
 map('x', '<C-k>', ":move '<-2<CR>gv=gv")
 
--- move between window
+-- Move between window
 map('n', '<leader>j', '<C-w>j')
 map('n', '<leader>h', '<C-w>h')
 map('n', '<leader>k', '<C-w>k')
 map('n', '<leader>l', '<C-w>l')
+
+-- Resizing window
+-- Resize width hold shift
+map('n', '<leader>-', ':vertical resize -5<CR>')
+map('n', '<leader>=', ':vertical resize +5<CR>')
+-- Resize heigh no shift
+map('n', '<leader>_', ':resize -5<CR>')
+map('n', '<leader>+', ':resize +5<CR>')
 
