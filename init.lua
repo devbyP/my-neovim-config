@@ -3,8 +3,7 @@ require('thanapon.setting')
 require('thanapon.keybinds')
 require('thanapon.plugins')
 
--- Completion config
-require('thanapon.plugins.cmp')
+-- Completion config require('thanapon.plugins.lsp.cmp')
 
 -- LSP config
 require('thanapon.plugins.lsp.installer')
