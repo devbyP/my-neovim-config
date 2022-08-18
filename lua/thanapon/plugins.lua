@@ -20,15 +20,12 @@ return require('packer').startup(function()
   })
 
   -- File Explorer manager --
-  use 'vifm/vifm.vim'
   use({
-    'scrooloose/nerdtree',
+    'kyazdani42/nvim-tree.lua',
     config = function()
-      require('thanapon.plugins.nerdtree')
+      require('thanapon.plugins.nvim-tree')
     end
   })
-  use 'tiagofumo/vim-nerdtree-syntax-highlight'
-  use 'ryanoasis/vim-devicons'
 
   -- Colorscheme --
   use({

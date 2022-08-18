@@ -39,9 +39,14 @@ nvim_lsp.sumneko_lua.setup({
 
 -- Default setting lsp servers.
 local servers = {
-  'gopls',
-  'tsserver',
-  'volar',
+  'gopls', -- Golang
+  'tsserver', -- Typescript and javascript
+  'volar', -- Vue3 recommended ls
+  'html', -- HTML
+  'cssls', -- Css language server
+  'jsonls', -- Json
+  'yamlls', -- yaml
+  'marksman', -- markdown ls
 }
 
 for _, server in ipairs(servers) do
