@@ -5,6 +5,9 @@ return require('packer').startup(function()
   ----------------------------------------------
   use 'wbthomason/packer.nvim'
 
+  -- Dependency for other plugins
+  use "nvim-lua/plenary.nvim"
+
   -- Icon --
   use 'kyazdani42/nvim-web-devicons'
 
@@ -73,6 +76,12 @@ return require('packer').startup(function()
   -- LSP
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
+  use({
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function()
+      require('thanapon.plugins.lsp.null-ls')
+    end
+  })
 
 end)
 
