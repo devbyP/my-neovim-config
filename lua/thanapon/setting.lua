@@ -7,11 +7,10 @@ local opt = vim.opt
 o.timeoutlen = 500
 o.updatetime = 200
 
-
 -- Better editor UI
 -- Line number
 o.number = true
-o.numberwidth = 2
+o.numberwidth = 5
 o.relativenumber = true
 o.signcolumn = 'yes'
 o.cursorline = true
@@ -19,8 +18,8 @@ o.cursorline = true
 -- Better editing experience
 -- Indent tab setting
 o.expandtab = true
-o.smarttab = true
-o.autoindent = true
+-- o.smarttab = true
+-- o.autoindent = true
 o.cindent = true
 o.tabstop = 2
 o.shiftwidth = 0
@@ -31,6 +30,8 @@ o.listchars = 'trail:·,nbsp:◇,tab:→ ,extends:▸,precedes:◂'
 -- o.listchars = 'eol:¬,space:·,lead: ,trail:·,nbsp:◇,tab:→-,extends:▸,precedes:◂,multispace:···⬝,leadmultispace:│   ,'
 -- o.formatoptions = 'qrn1'
 
+o.scrolloff = 8
+
 -- Editor line width
 o.textwidth = 300
 
@@ -38,7 +39,7 @@ o.textwidth = 300
 o.clipboard = 'unnamedplus'
 
 -- Search casing
-o.ignorecase = ture
+o.ignorecase = true
 o.smartcase = true
 
 -- Split buffer rules
