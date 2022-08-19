@@ -37,6 +37,20 @@ nvim_lsp.sumneko_lua.setup({
   }
 })
 
+local function get_typescript_os_path()
+  local o = vim.loop.os_uname().sysname
+  if o == 'Linux' then
+    -- My global node module path on Manjaro Linux using nvm.
+    -- This might need to update occationally when update node version.
+    return '/home/ttpui/.nvm/versions/node/v18.1.0/lib/node_modules/typescript/lib/tsserverlibrary.js'
+  end
+  if o == 'Darwin' then
+    -- Mac M1(Apple silicon) homebrew.
+    return '/opt/homebrew/lib/node_modules/typescript/lib/tsserverlibrary.js'
+  end
+  return '/usr/local/lib/node_modules/typescript/lib/tsserverlibrary.js'
+end
+
 -- volar's config
 -- use a local tsserver, and fallback to a global server.
 local util = nvim_lsp.util
@@ -46,9 +60,13 @@ local function get_typescript_server_path(root_dir)
   -- use "npm list -g"
   -- to find where is your node_modules global package live.
   -- replace that path with the part before "node_modules"
-  local global_ts = '/opt/homebrew/lib/node_modules/typescript/lib/tsserverlibrary.js'
+  -- local global_ts = '/node_modules/typescript/lib/tsserverlibrary.js'
   -- Alternative location if installed as root:
   -- local global_ts = '/usr/local/lib/node_modules/typescript/lib/tsserverlibrary.js'
+
+  -- get path base on my machine.
+  local global_ts = get_typescript_os_path()
+
   local found_ts = ''
   local function check_dir(path)
     found_ts =  util.path.join(path, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js')
