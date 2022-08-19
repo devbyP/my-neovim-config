@@ -1,4 +1,4 @@
-return require('packer').startup(function()
+return require('packer').startup(function(use)
 
   ----------------------------------------------
   -- Packer Package Manager to manage it self --
@@ -79,6 +79,14 @@ return require('packer').startup(function()
       require('thanapon.plugins.lsp.null-ls')
     end
   })
+
+  -- Git Tools --
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
 
 end)
 
