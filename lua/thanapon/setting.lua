@@ -59,3 +59,5 @@ opt.mouse = 'a'
 g.mapleader = ' '
 g.maplocalleader = ' '
 
+g.loaded = 1
+g.loaded_netrwPlugin = 1

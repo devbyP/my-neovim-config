@@ -13,7 +13,7 @@ function U.fmt_on_save(client, buf)
       group = fmt_group,
       buffer = buf,
       callback = function()
-        vim.lsp.buf.formatting_sync()
+        vim.lsp.buf.format({ bufnr = buf })
       end,
     })
   end
