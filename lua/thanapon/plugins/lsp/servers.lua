@@ -102,6 +102,7 @@ local servers = {
   'jsonls', -- Json
   'yamlls', -- yaml
   'marksman', -- markdown ls
+  'sqls'
 }
 
 for _, server in ipairs(servers) do

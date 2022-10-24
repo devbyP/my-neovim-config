@@ -19,6 +19,7 @@ nls.setup({
     -- 2. prettierd should come first to prevent occassional race condition
     fmt.prettier,
     fmt.eslint_d,
+    fmt.sql_formatter,
     -- fmt.prettier.with({
     --     extra_args = {
     --         '--tab-width=4',
