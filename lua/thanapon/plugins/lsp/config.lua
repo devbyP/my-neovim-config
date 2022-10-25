@@ -23,7 +23,6 @@ end
 U.disable_formatting = function(client)
   client.server_capabilities.document_formatting = false
   -- only use null-ls formatter
-  client.resolved_capabilities.document_formatting = false -- disable formatter capabilities
   client.server_capabilities.documentFormattingProvider = false -- 0.8 and later
   client.server_capabilities.documentRangeFormattingProvider = false
 end

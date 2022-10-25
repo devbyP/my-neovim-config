@@ -17,16 +17,16 @@ nls.setup({
     -- NOTE:
     -- 1. both needs to be enabled to so prettier can apply eslint fixes
     -- 2. prettierd should come first to prevent occassional race condition
-    fmt.prettier,
+    -- fmt.prettier,
     fmt.eslint_d,
-    -- fmt.prettier.with({
-    --     extra_args = {
-    --         '--tab-width=4',
-    --         '--trailing-comma=es5',
-    --         '--end-of-line=lf',
-    --         '--arrow-parens=always',
-    --     },
-    -- }),
+    fmt.prettier.with({
+        extra_args = {
+            '--tab-width=4',
+            '--trailing-comma=es5',
+            '--end-of-line=lf',
+            '--arrow-parens=always',
+        },
+    }),
     fmt.rustfmt,
     -- fmt.stylua,
     fmt.gofmt,
@@ -34,9 +34,9 @@ nls.setup({
     -- DIAGNOSTICS --
     -----------------
     dgn.eslint_d,
-    dgn.luacheck.with({
-      extra_args = { '--globals', 'vim', '--std', 'luajit' },
-    }),
+    -- dgn.luacheck.with({
+    --   extra_args = { '--globals', 'vim', '--std', 'luajit' },
+    -- }),
     ------------------
     -- CODE ACTIONS --
     ------------------

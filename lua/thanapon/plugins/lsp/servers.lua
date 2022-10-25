@@ -27,7 +27,7 @@ nvim_lsp.sumneko_lua.setup({
   settings = {
     Lua = {
       diagnostics = {
-        globals = { 'vim', 'use' },
+        globals = { 'vim' },
       },
       workspace = {
         -- Make the server aware of Neovim runtime files
@@ -82,15 +82,73 @@ local function get_typescript_server_path(root_dir)
 end
 
 nvim_lsp.volar.setup({
+  cmd = { 'vue-language-server', '--stdio' },
   flags = flags,
   capabilities = capabilities,
   on_attach = on_attach,
   -- Takeover mode
   filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
   -- tsserver path option.
+  root_dir = util.root_pattern('package.json', 'vue.config.js'),
+  init_options = {
+    languageFeatures = {
+      references = true,
+      definition = true,
+      typeDefinition = true,
+      callHierarchy = true,
+      hover = true,
+      rename = true,
+      signatureHelp = true,
+      codeAction = true,
+      completion = {
+        defaultTagNameCase = 'both',
+        defaultAttrNameCase = "kebabCase",
+        getDocumentNameCasesRequest = true,
+        getDocumentSelectionRequest = true,
+      },
+      documentLink = true,
+      codeLens = true,
+      diagnostics = true,
+    },
+    documentFeatures = {
+      selectionRange = true,
+      foldingRange = true,
+      documentSymbol = true,
+      documentColor = true,
+      documentFormatting = {
+        defaultPrintWidth = 100,
+        getDocumentPrintWidthRequest = true,
+      }
+    }
+  },
   on_new_config = function(new_config, new_root_dir)
     new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
   end,
+})
+
+-- Rust
+nvim_lsp.rust_analyzer.setup({
+    flags = flags,
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+        ['rust-analyzer'] = {
+            cargo = {
+                allFeatures = true,
+            },
+            checkOnSave = {
+                allFeatures = true,
+                command = 'clippy',
+            },
+            procMacro = {
+                ignored = {
+                    ['async-trait'] = { 'async_trait' },
+                    ['napi-derive'] = { 'napi' },
+                    ['async-recursion'] = { 'async_recursion' },
+                },
+            },
+        },
+    },
 })
 
 -- Default setting lsp servers.
@@ -105,10 +163,10 @@ local servers = {
 }
 
 for _, server in ipairs(servers) do
-    nvim_lsp[server].setup({
-        flags = flags,
-        capabilities = capabilities,
-        on_attach = on_attach,
-    })
+  nvim_lsp[server].setup({
+    flags = flags,
+    capabilities = capabilities,
+    on_attach = on_attach,
+  })
 end
 
