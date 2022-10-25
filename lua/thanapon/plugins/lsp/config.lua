@@ -61,6 +61,6 @@ U.key_mapping = function(bufnr)
   map('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
 end
 
-U.capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+U.capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 return U
