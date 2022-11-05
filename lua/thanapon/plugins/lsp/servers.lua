@@ -87,7 +87,7 @@ nvim_lsp.volar.setup({
   capabilities = capabilities,
   on_attach = on_attach,
   -- Takeover mode
-  filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
+  filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
   -- tsserver path option.
   root_dir = util.root_pattern('package.json'),
   init_options = {
@@ -106,8 +106,6 @@ nvim_lsp.volar.setup({
       completion = {
         defaultTagNameCase = 'both',
         defaultAttrNameCase = "kebabCase",
-        getDocumentNameCasesRequest = false,
-        getDocumentSelectionRequest = false,
       },
       documentHighlight = true,
       documentLink = true,
@@ -121,7 +119,6 @@ nvim_lsp.volar.setup({
       documentColor = false,
       documentFormatting = {
         defaultPrintWidth = 100,
-        getDocumentPrintWidthRequest = true,
       }
     }
   },

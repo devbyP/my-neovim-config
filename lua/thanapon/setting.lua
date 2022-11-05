@@ -18,9 +18,9 @@ o.cursorline = true
 -- Better editing experience
 -- Indent tab setting
 o.expandtab = true
--- o.smarttab = true
--- o.autoindent = true
-o.cindent = true
+o.smarttab = false
+o.autoindent = false
+o.cindent = false
 o.tabstop = 4
 o.shiftwidth = 0
 o.softtabstop = -1 -- use shiftwidth, set to negative
