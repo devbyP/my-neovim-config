@@ -81,8 +81,9 @@ return require('packer').startup(function(use)
     use 'rafamadriz/friendly-snippets'
 
     -- LSP
-    use 'neovim/nvim-lspconfig'
     use 'williamboman/mason.nvim'
+    use 'williamboman/mason-lspconfig.nvim'
+    use 'neovim/nvim-lspconfig'
     use({
         'jose-elias-alvarez/null-ls.nvim',
         config = function()

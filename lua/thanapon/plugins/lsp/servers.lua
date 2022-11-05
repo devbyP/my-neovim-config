@@ -69,7 +69,7 @@ local function get_typescript_server_path(root_dir)
 
   local found_ts = ''
   local function check_dir(path)
-    found_ts =  util.path.join(path, 'node_modules', 'typescript', 'lib', 'tsserverlibrary.js')
+    found_ts =  util.path.join(path, 'node_modules', 'typescript', 'lib')
     if util.path.exists(found_ts) then
       return path
     end
@@ -89,23 +89,27 @@ nvim_lsp.volar.setup({
   -- Takeover mode
   filetypes = {'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'json'},
   -- tsserver path option.
-  root_dir = util.root_pattern('package.json', 'vue.config.js'),
+  root_dir = util.root_pattern('package.json'),
   init_options = {
     languageFeatures = {
+      implementation = true,
       references = true,
       definition = true,
       typeDefinition = true,
       callHierarchy = true,
       hover = true,
       rename = true,
+      renameFileRefactoring = true,
       signatureHelp = true,
       codeAction = true,
+      workspaceSymbol = true,
       completion = {
         defaultTagNameCase = 'both',
         defaultAttrNameCase = "kebabCase",
-        getDocumentNameCasesRequest = true,
-        getDocumentSelectionRequest = true,
+        getDocumentNameCasesRequest = false,
+        getDocumentSelectionRequest = false,
       },
+      documentHighlight = true,
       documentLink = true,
       codeLens = true,
       diagnostics = true,
@@ -114,7 +118,7 @@ nvim_lsp.volar.setup({
       selectionRange = true,
       foldingRange = true,
       documentSymbol = true,
-      documentColor = true,
+      documentColor = false,
       documentFormatting = {
         defaultPrintWidth = 100,
         getDocumentPrintWidthRequest = true,
@@ -122,7 +126,7 @@ nvim_lsp.volar.setup({
     }
   },
   on_new_config = function(new_config, new_root_dir)
-    new_config.init_options.typescript.serverPath = get_typescript_server_path(new_root_dir)
+    new_config.init_options.typescript.tsdk = get_typescript_server_path(new_root_dir)
   end,
 })
 
