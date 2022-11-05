@@ -58,7 +58,7 @@ U.key_mapping = function(bufnr)
   map('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
   -- map('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   map('n', 'gr', vim.lsp.buf.references, bufopts)
-  map('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
+  map('n', '<leader>fm', vim.lsp.buf.formatting, bufopts)
 end
 
 U.capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
