@@ -3,6 +3,8 @@ local g = vim.g
 local o = vim.o
 local opt = vim.opt
 
+o.termguicolors = true
+
 -- Decrese update time
 o.timeoutlen = 500
 o.updatetime = 200

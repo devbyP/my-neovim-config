@@ -28,12 +28,9 @@ return require('packer').startup(function(use)
     })
 
     -- Colorscheme --
-    use({
-        'RRethy/nvim-base16',
-        config = function()
-            require('thanapon.plugins.nvim-base16')
-        end
-    })
+    use({'RRethy/nvim-base16'})
+
+    use({'pineapplegiant/spaceduck'})
 
     -- Telescope --
     use({

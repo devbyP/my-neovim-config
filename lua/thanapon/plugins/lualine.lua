@@ -1,4 +1,7 @@
 require('lualine').setup({
+    options = {
+        theme = 'spaceduck'
+    },
     inactive_sections = {
         lualine_c = {
             {
