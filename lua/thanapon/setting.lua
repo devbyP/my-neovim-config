@@ -3,7 +3,7 @@ local g = vim.g
 local o = vim.o
 local opt = vim.opt
 
-o.termguicolors = true
+opt.termguicolors = true
 
 -- Decrese update time
 o.timeoutlen = 500
@@ -26,7 +26,7 @@ o.cindent = false
 o.tabstop = 4
 o.shiftwidth = 0
 o.softtabstop = -1 -- use shiftwidth, set to negative
-o.wrap = true
+o.wrap = false
 o.list = true
 o.listchars = 'trail:·,nbsp:◇,tab:→ ,extends:▸,precedes:◂'
 -- o.listchars = 'eol:¬,space:·,lead: ,trail:·,nbsp:◇,tab:→-,extends:▸,precedes:◂,multispace:···⬝,leadmultispace:│   ,'
@@ -35,7 +35,8 @@ o.listchars = 'trail:·,nbsp:◇,tab:→ ,extends:▸,precedes:◂'
 o.scrolloff = 8
 
 -- Editor line width
-o.textwidth = 300
+o.textwidth = 200
+opt.colorcolumn = "100"
 
 -- Make vim and os clipboard share
 o.clipboard = 'unnamedplus'
@@ -43,6 +44,7 @@ o.clipboard = 'unnamedplus'
 -- Search casing
 o.ignorecase = true
 o.smartcase = true
+opt.hlsearch = false
 
 -- Split buffer rules
 o.splitright = true

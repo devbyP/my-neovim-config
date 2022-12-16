@@ -12,5 +12,6 @@
 -- vim.cmd('colorscheme base16-material-palenight')
 -- vim.cmd('colorscheme base16-gruvbox-dark-medium')
 -- vim.cmd('colorscheme base16-spaceduck')
-
-vim.cmd('colorscheme spaceduck')
+--
+-- vim.cmd('colorscheme spaceduck')
+vim.cmd('colorscheme rose-pine')

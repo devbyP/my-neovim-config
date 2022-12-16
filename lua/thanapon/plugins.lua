@@ -19,6 +19,11 @@ return require('packer').startup(function(use)
         end
     })
 
+    use({
+        'rose-pine/neovim',
+        as = 'rose-pine'
+    })
+
     -- File Explorer manager --
     use({
         'kyazdani42/nvim-tree.lua',
