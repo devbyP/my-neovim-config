@@ -47,6 +47,20 @@ return require('packer').startup(function(use)
         end
     })
 
+    use({
+        'thePrimeagen/harpoon',
+        config = function()
+            require('thanapon.plugins.harpoon')
+        end
+    })
+
+    use({
+        "mbbill/undotree",
+        config = function()
+            require("thanapon.plugins.undotree")
+        end
+    })
+
     -- Terminal --
     use({
         'numToStr/FTerm.nvim',
