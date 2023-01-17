@@ -54,6 +54,7 @@ o.splitbelow = true
 o.backup = false
 o.writebackup = false
 o.undofile = true
+opt.undodir = os.getenv("HOME") .."/.vim/undodir"
 o.swapfile = false
 
 -- Enable mouse

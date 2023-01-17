@@ -19,9 +19,12 @@ return require('packer').startup(function(use)
         end
     })
 
+    -- Indent line mark --
     use({
-        'rose-pine/neovim',
-        as = 'rose-pine'
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require("thanapon.plugins.indent")
+        end
     })
 
     -- File Explorer manager --
@@ -37,6 +40,11 @@ return require('packer').startup(function(use)
 
     use({'pineapplegiant/spaceduck'})
 
+    use({
+        'rose-pine/neovim',
+        as = 'rose-pine'
+    })
+
     -- Telescope --
     use({
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
@@ -47,6 +55,7 @@ return require('packer').startup(function(use)
         end
     })
 
+    -- Harpoon for file navigation --
     use({
         'thePrimeagen/harpoon',
         config = function()
@@ -54,6 +63,7 @@ return require('packer').startup(function(use)
         end
     })
 
+    -- Undotree for file history --
     use({
         "mbbill/undotree",
         config = function()
