@@ -15,3 +15,4 @@
 --
 -- vim.cmd('colorscheme spaceduck')
 vim.cmd('colorscheme rose-pine')
+

@@ -20,8 +20,8 @@ o.cursorline = true
 -- Better editing experience
 -- Indent tab setting
 o.expandtab = true
-o.smarttab = false
-o.autoindent = false
+o.smarttab = true
+o.autoindent = true
 o.cindent = false
 o.tabstop = 4
 o.shiftwidth = 0

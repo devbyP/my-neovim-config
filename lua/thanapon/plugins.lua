@@ -14,25 +14,16 @@ return require('packer').startup(function(use)
     -- Status line
     use({
         'nvim-lualine/lualine.nvim',
-        config = function()
-           require('thanapon.plugins.lualine')
-        end
     })
 
     -- Indent line mark --
     use({
         "lukas-reineke/indent-blankline.nvim",
-        config = function()
-            require("thanapon.plugins.indent")
-        end
     })
 
     -- File Explorer manager --
     use({
         'kyazdani42/nvim-tree.lua',
-        config = function()
-            require('thanapon.plugins.nvim-tree')
-        end
     })
 
     -- Colorscheme --
@@ -50,72 +41,50 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         -- or                          , branch = '0.1.x',
         requires = { {'nvim-lua/plenary.nvim'} },
-        config = function()
-            require('thanapon.plugins.telescope')
-        end
     })
 
     -- Harpoon for file navigation --
     use({
         'thePrimeagen/harpoon',
-        config = function()
-            require('thanapon.plugins.harpoon')
-        end
     })
 
     -- Undotree for file history --
     use({
         "mbbill/undotree",
-        config = function()
-            require("thanapon.plugins.undotree")
-        end
     })
 
     -- Terminal --
     use({
         'numToStr/FTerm.nvim',
         event = 'CursorHold',
-        config = function()
-            require('thanapon.plugins.fterm')
-        end
     })
 
     -- Better syntax highlight --
-    use({
-        {
-            'nvim-treesitter/nvim-treesitter',
-            event = 'CursorHold',
-            run = ':TSUpdate',
-            config = function()
-                require('thanapon.plugins.treesitter')
-            end
-        },
-        { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
-    })
+    use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+    use('p00f/nvim-ts-rainbow', { after = 'nvim-treesitter' })
 
     -- LSP Config, Snippet, and Completion --
+    use {
+        'VonHeikemen/lsp-zero.nvim',
+        requires = {
+        -- LSP Support
+        {'neovim/nvim-lspconfig'},             -- Required
+        {'williamboman/mason.nvim'},           -- Optional
+        {'williamboman/mason-lspconfig.nvim'}, -- Optional
 
-    -- Completion
-    use 'hrsh7th/nvim-cmp'
-    use 'hrsh7th/cmp-buffer'
-    use 'hrsh7th/cmp-path'
-    use 'saadparwaiz1/cmp_luasnip'
-    use 'hrsh7th/cmp-nvim-lsp'
+        -- Autocompletion
+        {'hrsh7th/nvim-cmp'},         -- Required
+        {'hrsh7th/cmp-nvim-lsp'},     -- Required
+        {'hrsh7th/cmp-buffer'},       -- Optional
+        {'hrsh7th/cmp-path'},         -- Optional
+        {'saadparwaiz1/cmp_luasnip'}, -- Optional
+        {'hrsh7th/cmp-nvim-lua'},     -- Optional
 
-    -- Snippet engine
-    use 'L3MON4D3/LuaSnip'
-    use 'rafamadriz/friendly-snippets'
-
-    -- LSP
-    use 'williamboman/mason.nvim'
-    use 'williamboman/mason-lspconfig.nvim'
-    use 'neovim/nvim-lspconfig'
-    use({
-        'jose-elias-alvarez/null-ls.nvim',
-        config = function()
-            require('thanapon.plugins.lsp.null-ls')
-        end
-    })
+        -- Snippets
+        {'L3MON4D3/LuaSnip'},             -- Required
+        {'rafamadriz/friendly-snippets'}, -- Optional
+      }
+    }
 
     -- Git Tools --
     use {
