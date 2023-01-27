@@ -61,6 +61,7 @@ return require('packer').startup(function(use)
 
     -- Better syntax highlight --
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
+    use('nvim-treesitter/nvim-treesitter-context')
     use('p00f/nvim-ts-rainbow', { after = 'nvim-treesitter' })
 
     -- LSP Config, Snippet, and Completion --
