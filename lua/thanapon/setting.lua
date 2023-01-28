@@ -5,6 +5,8 @@ local opt = vim.opt
 
 opt.termguicolors = true
 
+opt.encoding = "utf-8"
+
 -- Decrese update time
 o.timeoutlen = 500
 o.updatetime = 200
