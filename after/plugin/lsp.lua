@@ -25,8 +25,6 @@ lsp.setup_nvim_cmp({
     mapping = cmp_mappings
 })
 
-
---[[
 local fmt_group = vim.api.nvim_create_augroup('FORMATTING', { clear = true })
 
 local fmt_on_save = function(client, buf)
@@ -41,7 +39,6 @@ local fmt_on_save = function(client, buf)
         })
     end
 end
-]] --
 
 local map = function(m, v, a, opts)
     vim.keymap.set(m, v, a, opts)
@@ -69,8 +66,11 @@ local key_mapping = function(bufnr)
     map('n', '<leader>fm', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
-lsp.on_attach(function(_, bufnr)
-    -- fmt_on_save(client, bufnr)
+lsp.on_attach(function(client, bufnr)
+    -- auto format on save only when using gopls (golang autofomat everytime to follow go idiomatic).
+    if client.name == "gopls" then
+        fmt_on_save(client, bufnr)
+    end
     key_mapping(bufnr)
 end)
 
