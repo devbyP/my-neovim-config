@@ -6,7 +6,7 @@ lsp.ensure_installed({
     "gopls",
     "tsserver",
     "volar",
-    "sumneko_lua",
+    "lua_ls",
     "rust_analyzer",
     "clangd",
 })
@@ -70,6 +70,14 @@ lsp.on_attach(function(client, bufnr)
     -- auto format on save only when using gopls (golang autofomat everytime to follow go idiomatic).
     if client.name == "gopls" then
         fmt_on_save(client, bufnr)
+    end
+    if client.name == "tsserver" then
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
+    end
+    if client.name == "volar" then
+        client.server_capabilities.documentFormattingProvider = false
+        client.server_capabilities.documentRangeFormattingProvider = false
     end
     key_mapping(bufnr)
 end)

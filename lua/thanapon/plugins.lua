@@ -59,6 +59,11 @@ return require('packer').startup(function(use)
         event = 'CursorHold',
     })
 
+    -- Zen Mode --
+    use("folke/zen-mode.nvim")
+    -- Twilight dim inactive code (use with zen mode) --
+    use("folke/twilight.nvim")
+
     -- Better syntax highlight --
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
     use('nvim-treesitter/nvim-treesitter-context')
@@ -86,6 +91,8 @@ return require('packer').startup(function(use)
         {'rafamadriz/friendly-snippets'}, -- Optional
       }
     }
+
+    use('jose-elias-alvarez/null-ls.nvim')
 
     -- Git Tools --
     use {
