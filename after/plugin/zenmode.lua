@@ -4,7 +4,7 @@ zen.setup({
     plugins = {
         kitty = {
             enabled = true,
-            font = "+8",
+            font = "+6",
         },
     },
     on_open = function()
