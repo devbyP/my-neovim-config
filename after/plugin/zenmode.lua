@@ -2,9 +2,10 @@ require("twilight").setup()
 local zen = require("zen-mode")
 zen.setup({
     plugins = {
+        tmux = { enabled = true },
         kitty = {
             enabled = true,
-            font = "+6",
+            font = "18",
         },
     },
     on_open = function()

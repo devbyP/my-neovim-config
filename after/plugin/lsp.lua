@@ -8,7 +8,6 @@ lsp.ensure_installed({
     "volar",
     "lua_ls",
     "rust_analyzer",
-    "clangd",
 })
 
 -- (Optional) Configure lua language server for neovim
@@ -53,6 +52,8 @@ local key_mapping = function(bufnr)
     map('n', 'gd', vim.lsp.buf.definition, bufopts)
     map('n', 'gD', vim.lsp.buf.declaration, bufopts)
     map('n', '<leader>e', vim.diagnostic.open_float, bufopts)
+    map('n', 'd]', vim.diagnostic.goto_next, bufopts)
+    map('n', 'd[', vim.diagnostic.goto_prev, bufopts)
     map('n', 'K', vim.lsp.buf.hover, bufopts)
     map('n', 'gi', vim.lsp.buf.implementation, bufopts)
     map('n', '<C-h>', vim.lsp.buf.signature_help, bufopts)
@@ -83,3 +84,7 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 lsp.setup()
+
+vim.diagnostic.config({
+    virtual_text = true,
+})
