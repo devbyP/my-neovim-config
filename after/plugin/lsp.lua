@@ -2,12 +2,9 @@ local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
 lsp.ensure_installed({
-    "eslint",
     "gopls",
     "tsserver",
     "volar",
-    "lua_ls",
-    "rust_analyzer",
 })
 
 -- (Optional) Configure lua language server for neovim
@@ -62,7 +59,7 @@ local key_mapping = function(bufnr)
     end, bufopts)
     map('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
     map('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-    -- map('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+    map('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
     map('n', 'gr', vim.lsp.buf.references, bufopts)
     map('n', '<leader>fm', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
