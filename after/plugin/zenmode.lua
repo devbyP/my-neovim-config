@@ -5,7 +5,7 @@ zen.setup({
         tmux = { enabled = true },
         kitty = {
             enabled = true,
-            font = "18",
+            font = "+6",
         },
     },
     on_open = function()
