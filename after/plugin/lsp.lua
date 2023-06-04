@@ -5,6 +5,9 @@ lsp.ensure_installed({
     "gopls",
     "tsserver",
     "volar",
+    "clangd",
+    "rust_analyzer",
+    "lua_ls",
 })
 
 -- (Optional) Configure lua language server for neovim
