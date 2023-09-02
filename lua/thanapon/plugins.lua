@@ -1,5 +1,4 @@
 return require('packer').startup(function(use)
-
     ----------------------------------------------
     -- Packer Package Manager to manage it self --
     ----------------------------------------------
@@ -7,9 +6,6 @@ return require('packer').startup(function(use)
 
     -- Dependency for other plugins
     use "nvim-lua/plenary.nvim"
-
-    -- Icon --
-    use 'kyazdani42/nvim-web-devicons'
 
     -- Status line
     use({
@@ -24,12 +20,15 @@ return require('packer').startup(function(use)
     -- File Explorer manager --
     use({
         'kyazdani42/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons',
+        },
     })
 
     -- Colorscheme --
-    use({'RRethy/nvim-base16'})
+    use({ 'RRethy/nvim-base16' })
 
-    use({'pineapplegiant/spaceduck'})
+    use({ 'pineapplegiant/spaceduck' })
 
     use({
         'rose-pine/neovim',
@@ -38,9 +37,10 @@ return require('packer').startup(function(use)
 
     -- Telescope --
     use({
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        'nvim-telescope/telescope.nvim',
+        tag = '0.1.0',
         -- or                          , branch = '0.1.x',
-        requires = { {'nvim-lua/plenary.nvim'} },
+        requires = { { 'nvim-lua/plenary.nvim' } },
     })
 
     -- Harpoon for file navigation --
@@ -73,23 +73,23 @@ return require('packer').startup(function(use)
     use {
         'VonHeikemen/lsp-zero.nvim',
         requires = {
-        -- LSP Support
-        {'neovim/nvim-lspconfig'},             -- Required
-        {'williamboman/mason.nvim'},           -- Optional
-        {'williamboman/mason-lspconfig.nvim'}, -- Optional
+            -- LSP Support
+            { 'neovim/nvim-lspconfig' },       -- Required
+            { 'williamboman/mason.nvim' },     -- Optional
+            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
-        -- Autocompletion
-        {'hrsh7th/nvim-cmp'},         -- Required
-        {'hrsh7th/cmp-nvim-lsp'},     -- Required
-        {'hrsh7th/cmp-buffer'},       -- Optional
-        {'hrsh7th/cmp-path'},         -- Optional
-        {'saadparwaiz1/cmp_luasnip'}, -- Optional
-        {'hrsh7th/cmp-nvim-lua'},     -- Optional
+            -- Autocompletion
+            { 'hrsh7th/nvim-cmp' },   -- Required
+            { 'hrsh7th/cmp-nvim-lsp' }, -- Required
+            { 'hrsh7th/cmp-buffer' }, -- Optional
+            { 'hrsh7th/cmp-path' },   -- Optional
+            { 'saadparwaiz1/cmp_luasnip' }, -- Optional
+            { 'hrsh7th/cmp-nvim-lua' }, -- Optional
 
-        -- Snippets
-        {'L3MON4D3/LuaSnip'},             -- Required
-        {'rafamadriz/friendly-snippets'}, -- Optional
-      }
+            -- Snippets
+            { 'L3MON4D3/LuaSnip' },       -- Required
+            { 'rafamadriz/friendly-snippets' }, -- Optional
+        }
     }
 
     use('jose-elias-alvarez/null-ls.nvim')
@@ -103,7 +103,7 @@ return require('packer').startup(function(use)
     }
 
     -- Markdown Preview --
-    use{
+    use {
         "iamcco/markdown-preview.nvim",
         run = "cd app && npm install",
         setup = function()
@@ -111,6 +111,4 @@ return require('packer').startup(function(use)
         end,
         ft = { "markdown" }
     }
-
 end)
-

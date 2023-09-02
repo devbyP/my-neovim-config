@@ -18,6 +18,11 @@ local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
     ["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
     ["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
+    -- `Enter` key to confirm completion
+    ['<CR>'] = cmp.mapping.confirm({select = false}),
+
+    -- Ctrl+Space to trigger completion menu
+    ['<C-Space>'] = cmp.mapping.complete(),
 })
 
 lsp.setup_nvim_cmp({
