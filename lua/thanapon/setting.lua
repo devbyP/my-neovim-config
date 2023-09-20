@@ -68,3 +68,12 @@ g.maplocalleader = ' '
 
 g.loaded = 1
 g.loaded_netrwPlugin = 1
+
+function SetTabWidth(n)
+    if (type(n) ~= "number") then
+        -- set default to 4 space
+        o.tabstop = 4
+        return
+    end
+    o.tabstop = n
+end
