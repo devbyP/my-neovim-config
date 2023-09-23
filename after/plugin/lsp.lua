@@ -1,32 +1,35 @@
 local lsp = require('lsp-zero')
 lsp.preset('recommended')
 
-lsp.ensure_installed({
-    "gopls",
-    "tsserver",
-    "volar",
-    "clangd",
-    "rust_analyzer",
-    "lua_ls",
+require('mason').setup({})
+require('mason-lspconfig').setup({
+    ensure_installed = {
+        "gopls",
+        "tsserver",
+        "volar",
+        "clangd",
+        "rust_analyzer",
+    },
+    handlers = {
+        lsp.default_setup,
+    },
 })
 
--- (Optional) Configure lua language server for neovim
-lsp.nvim_workspace()
+local lua_opts = lsp.nvim_lua_ls()
+require('lspconfig').lua_ls.setup(lua_opts)
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings({
-    ["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
-    ["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
-    -- `Enter` key to confirm completion
-    ['<CR>'] = cmp.mapping.confirm({select = false}),
+cmp.setup({
+    mapping = cmp.mapping.preset.insert({
+        ["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
+        ["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
+        -- `Enter` key to confirm completion
+        ['<CR>'] = cmp.mapping.confirm({select = false}),
 
-    -- Ctrl+Space to trigger completion menu
-    ['<C-Space>'] = cmp.mapping.complete(),
-})
-
-lsp.setup_nvim_cmp({
-    mapping = cmp_mappings
+        -- Ctrl+Space to trigger completion menu
+        ['<C-Space>'] = cmp.mapping.complete(),
+    })
 })
 
 local fmt_group = vim.api.nvim_create_augroup('FORMATTING', { clear = true })
