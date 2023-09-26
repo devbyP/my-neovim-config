@@ -9,6 +9,7 @@ require('mason-lspconfig').setup({
         "volar",
         "clangd",
         "rust_analyzer",
+        "lua_ls"
     },
     handlers = {
         lsp.default_setup,
