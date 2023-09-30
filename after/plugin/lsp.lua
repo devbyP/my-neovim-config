@@ -1,5 +1,4 @@
 local lsp = require('lsp-zero')
-lsp.preset('recommended')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -7,16 +6,16 @@ require('mason-lspconfig').setup({
         "gopls",
         "tsserver",
         "volar",
-        "clangd",
         "rust_analyzer",
-        "lua_ls"
+        "lua_ls",
     },
     handlers = {
         lsp.default_setup,
     },
 })
 
-require('lspconfig').lua_ls.setup({})
+local workspace = lsp.nvim_lua_ls()
+require('lspconfig').lua_ls.setup(workspace)
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -25,12 +24,18 @@ cmp.setup({
         ["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
         ["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
         -- `Enter` key to confirm completion
-        ['<CR>'] = cmp.mapping.confirm({select = false}),
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
 
         -- Ctrl+Space to trigger completion menu
         ['<C-Space>'] = cmp.mapping.complete(),
-    })
+    }),
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
+    },
 })
+require("luasnip.loaders.from_vscode").lazy_load()
 
 local fmt_group = vim.api.nvim_create_augroup('FORMATTING', { clear = true })
 
