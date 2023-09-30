@@ -8,7 +8,6 @@ map('i', '<C-E>', '<ESC>A')
 map('i', '<C-A>', '<ESC>I')
 
 -- Easy quit insert mode
-map('i', 'jk', '<ESC>')
 map('i', 'kj', '<ESC>')
 
 -- Move to the next/previous buffer
