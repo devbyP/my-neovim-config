@@ -1,4 +1,4 @@
-local lsp = require('lsp-zero')
+local lsp_zero = require('lsp-zero')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
@@ -10,28 +10,44 @@ require('mason-lspconfig').setup({
         "lua_ls",
     },
     handlers = {
-        lsp.default_setup,
+        lsp_zero.default_setup,
     },
 })
 
-local workspace = lsp.nvim_lua_ls()
+local workspace = lsp_zero.nvim_lua_ls()
 require('lspconfig').lua_ls.setup(workspace)
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
+local cmp_action = lsp_zero.cmp_action()
+
+local luasnip = require('luasnip')
 cmp.setup({
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'nvim_lua' },
+        { name = 'luasnip' },
+    },
+    formatting = lsp_zero.cmp_format(),
     mapping = cmp.mapping.preset.insert({
         ["<C-j>"] = cmp.mapping.select_next_item(cmp_select),
         ["<C-k>"] = cmp.mapping.select_prev_item(cmp_select),
         -- `Enter` key to confirm completion
         ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        -- super tab setup.
+        -- ['<Tab>'] = cmp_action.luasnip_supertab(),
+        -- ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
+
+        -- regular tab setup.
+        ['<Tab>'] = cmp_action.tab_complete(),
+        ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
 
         -- Ctrl+Space to trigger completion menu
         ['<C-Space>'] = cmp.mapping.complete(),
     }),
     snippet = {
         expand = function(args)
-            require('luasnip').lsp_expand(args.body)
+            luasnip.lsp_expand(args.body)
         end,
     },
 })
@@ -80,7 +96,7 @@ local key_mapping = function(bufnr)
     map('n', '<leader>fm', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
-lsp.on_attach(function(client, bufnr)
+lsp_zero.on_attach(function(client, bufnr)
     -- auto format on save only when using gopls (golang autofomat everytime to follow go idiomatic).
     if client.name == "gopls" then
         fmt_on_save(client, bufnr)
@@ -96,7 +112,7 @@ lsp.on_attach(function(client, bufnr)
     key_mapping(bufnr)
 end)
 
-lsp.setup()
+lsp_zero.setup()
 
 vim.diagnostic.config({
     virtual_text = true,
