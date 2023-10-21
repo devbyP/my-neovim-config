@@ -44,6 +44,7 @@ cmp.setup({
 
         -- Ctrl+Space to trigger completion menu
         ['<C-Space>'] = cmp.mapping.complete(),
+        ['<M-Space>'] = cmp.mapping.complete(),
     }),
     snippet = {
         expand = function(args)
