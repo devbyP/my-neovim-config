@@ -69,6 +69,8 @@ return require('packer').startup(function(use)
     use('nvim-treesitter/nvim-treesitter-context')
     use('p00f/nvim-ts-rainbow', { after = 'nvim-treesitter' })
 
+    use("vrischmann/tree-sitter-templ")
+
     -- LSP Config, Snippet, and Completion --
     use {
         'VonHeikemen/lsp-zero.nvim',
