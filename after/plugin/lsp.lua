@@ -93,7 +93,8 @@ local key_mapping = function(bufnr)
     map('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
     map('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
     map('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-    map('n', 'gr', vim.lsp.buf.references, bufopts)
+    -- use telescope lsp_refernces
+    -- map('n', 'gr', vim.lsp.buf.references, bufopts)
     map('n', '<leader>fm', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
