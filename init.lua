@@ -7,7 +7,97 @@ local keymap = vim.keymap
 g.mapleader = ' '
 g.maplocalleader = ' '
 
-vim.o.termguicolors = true
+o.termguicolors = true
+opt.showmode = false
+
+opt.breakindent = true
+
+wo.number = true
+wo.signcolumn = 'yes'
+wo.relativenumber = true
+
+o.hlsearch = true
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+o.mouse = 'a'
+
+o.clipboard = 'unnamedplus'
+
+o.ignorecase = true
+o.smartcase = true
+
+o.autoindent = true
+o.tabstop = 4
+o.shiftwidth = 0
+o.softtabstop = -1 -- use shiftwidth, set to negative
+o.wrap = false
+
+opt.list = true
+opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+
+o.scrolloff = 8
+
+o.completeopt = 'menuone,noselect'
+
+o.updatetime = 250
+o.timeoutlen = 400
+
+o.splitright = true
+o.splitbelow = true
+
+-- disable netrw for nvim tree
+g.loaded_netrw = 1
+g.loaded_netrwPlugin = 1
+
+opt.colorcolumn = "100"
+-- wo.cursorline = true
+
+keymap.set('i', 'kj', '<ESC>', { silent = true })
+
+-- Move line up and down in NORMAL and VISUAL modes
+-- Reference: https://vim.fandom.com/wiki/Moving_lines_up_or_down
+keymap.set('n', '<C-j>', ':move .+1<CR>', { silent = true })
+keymap.set('n', '<C-k>', ':move .-2<CR>', { silent = true })
+keymap.set('x', '<C-j>', ":move '>+1<CR>gv=gv", { silent = true })
+keymap.set('x', '<C-k>', ":move '<-2<CR>gv=gv", { silent = true })
+
+
+-- Move between window
+keymap.set('n', '<leader>j', '<C-w>j', { silent = true })
+keymap.set('n', '<leader>h', '<C-w>h', { silent = true })
+keymap.set('n', '<leader>k', '<C-w>k', { silent = true })
+keymap.set('n', '<leader>l', '<C-w>l', { silent = true })
+
+-- Resizing window
+-- Resize width hold shift
+keymap.set('n', '<leader>-', ':vertical resize -5<CR>', { silent = true })
+keymap.set('n', '<leader>=', ':vertical resize +5<CR>', { silent = true })
+-- Resize heigh no shift
+keymap.set('n', '<leader>_', ':resize -5<CR>', { silent = true })
+keymap.set('n', '<leader>+', ':resize +5<CR>', { silent = true })
+
+keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+-- Remap for dealing with word wrap
+keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- Diagnostic keymaps
+keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
+keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+    group = highlight_group,
+    pattern = '*',
+})
 
 local lazypath = vim.fn.stdpath 'data' .. 'lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -151,6 +241,7 @@ require('lazy').setup({
         opts = {},
         config = function()
             vim.cmd [[colorscheme tokyonight-night]]
+            vim.cmd.hi 'Comment gui=none'
         end
     },
 
@@ -188,89 +279,6 @@ require('lazy').setup({
 
     { import = 'me.plugins' },
 }, {})
-
-wo.number = true
-wo.signcolumn = 'yes'
-wo.relativenumber = true
-
-o.hlsearch = false
-
-o.mouse = 'a'
-
-o.clipboard = 'unnamedplus'
-
-o.ignorecase = true
-o.smartcase = true
-
-o.autoindent = true
-o.tabstop = 4
-o.shiftwidth = 0
-o.softtabstop = -1 -- use shiftwidth, set to negative
-o.wrap = false
-
-o.scrolloff = 8
-
-o.completeopt = 'menuone,noselect'
-
-o.updatetime = 250
-o.timeoutlen = 400
-
-o.splitright = true
-o.splitbelow = true
-
--- disable netrw for nvim tree
-g.loaded_netrw = 1
-g.loaded_netrwPlugin = 1
-
-opt.colorcolumn = "100"
--- wo.cursorline = true
-
-keymap.set('i', 'kj', '<ESC>', { silent = true })
-
--- Move line up and down in NORMAL and VISUAL modes
--- Reference: https://vim.fandom.com/wiki/Moving_lines_up_or_down
-keymap.set('n', '<C-j>', ':move .+1<CR>', { silent = true })
-keymap.set('n', '<C-k>', ':move .-2<CR>', { silent = true })
-keymap.set('x', '<C-j>', ":move '>+1<CR>gv=gv", { silent = true })
-keymap.set('x', '<C-k>', ":move '<-2<CR>gv=gv", { silent = true })
-
-
--- Move between window
-keymap.set('n', '<leader>j', '<C-w>j', { silent = true })
-keymap.set('n', '<leader>h', '<C-w>h', { silent = true })
-keymap.set('n', '<leader>k', '<C-w>k', { silent = true })
-keymap.set('n', '<leader>l', '<C-w>l', { silent = true })
-
--- Resizing window
--- Resize width hold shift
-keymap.set('n', '<leader>-', ':vertical resize -5<CR>', { silent = true })
-keymap.set('n', '<leader>=', ':vertical resize +5<CR>', { silent = true })
--- Resize heigh no shift
-keymap.set('n', '<leader>_', ':resize -5<CR>', { silent = true })
-keymap.set('n', '<leader>+', ':resize +5<CR>', { silent = true })
-
-keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
--- Remap for dealing with word wrap
-keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
--- Diagnostic keymaps
-keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
-
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-    callback = function()
-        vim.highlight.on_yank()
-    end,
-    group = highlight_group,
-    pattern = '*',
-})
 
 require 'me.conf.telescope'
 require 'me.conf.treesitter'
