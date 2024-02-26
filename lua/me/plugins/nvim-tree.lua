@@ -1,29 +1,29 @@
 return {
-	'kyazdani42/nvim-tree.lua',
+	"kyazdani42/nvim-tree.lua",
 	version = "*",
 	lazy = false,
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
 	},
 	config = function()
-		require("nvim-tree").setup {
+		require("nvim-tree").setup({
 			sort_by = "case_sensitive",
 			view = {
 				adaptive_size = true,
-				side = 'left',
+				side = "left",
 			},
-				filters = {
-				custom = { '.git$', 'node_modules$' }
+			filters = {
+				custom = { ".git$", "node_modules$" },
 			},
 			git = {
-			ignore = false,
+				ignore = false,
 			},
 			actions = {
 				open_file = {
 					window_picker = {
 						enable = false,
-					}
-				}
+					},
+				},
 			},
 			renderer = {
 				icons = {
@@ -34,22 +34,22 @@ return {
 						folder_arrow = false,
 					},
 					glyphs = {
-						default = '',
+						default = "",
 						git = {
-							unstaged = '~',
-							staged = '+',
-							unmerged = '!',
-							renamed = '≈',
-							untracked = '?',
-							deleted = '-',
+							unstaged = "~",
+							staged = "+",
+							unmerged = "!",
+							renamed = "≈",
+							untracked = "?",
+							deleted = "-",
 						},
 					},
 				},
 				indent_markers = {
 					enable = true,
 				},
-			}
-		}
+			},
+		})
 		local function open_nvim_tree(data)
 			-- buffer is a [No Name]
 			local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
@@ -70,9 +70,9 @@ return {
 			require("nvim-tree.api").tree.open()
 		end
 
-		vim.keymap.set('n', '<leader>tt', ':NvimTreeToggle<CR>', { silent = true })
-		vim.keymap.set('n', '<leader>tf', ':NvimTreeFocus<CR>', { silent = true })
+		vim.keymap.set("n", "<leader>tt", ":NvimTreeToggle<CR>", { silent = true })
+		vim.keymap.set("n", "<leader>tf", ":NvimTreeFocus<CR>", { silent = true })
 
 		vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
-	end
+	end,
 }
