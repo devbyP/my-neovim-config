@@ -29,6 +29,8 @@ return {
 				-- You can use a sub-list to tell conform to run *until* a formatter
 				-- is found.
 				javascript = { { "prettierd", "prettier" } },
+				typescript = { { "prettierd", "prettier" } },
+				vue = { { "prettierd", "prettier" } },
 			},
 		})
 		vim.api.nvim_create_user_command("Format", function(args)

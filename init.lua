@@ -34,13 +34,14 @@ o.wrap = false
 
 opt.list = true
 opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+opt.undofile = true
 
 o.scrolloff = 8
 
 o.completeopt = "menuone,noselect"
 
 o.updatetime = 250
-o.timeoutlen = 400
+o.timeoutlen = 300
 
 o.splitright = true
 o.splitbelow = true
@@ -69,11 +70,11 @@ keymap.set("n", "<leader>l", "<C-w>l", { silent = true })
 
 -- Resizing window
 -- Resize width hold shift
-keymap.set("n", "<leader>-", ":vertical resize -5<CR>", { silent = true })
-keymap.set("n", "<leader>=", ":vertical resize +5<CR>", { silent = true })
+keymap.set("n", "<leader>-", ":vertical resize -4<CR>", { silent = true })
+keymap.set("n", "<leader>=", ":vertical resize +4<CR>", { silent = true })
 -- Resize heigh no shift
-keymap.set("n", "<leader>_", ":resize -5<CR>", { silent = true })
-keymap.set("n", "<leader>+", ":resize +5<CR>", { silent = true })
+keymap.set("n", "<leader>_", ":resize -4<CR>", { silent = true })
+keymap.set("n", "<leader>+", ":resize +4<CR>", { silent = true })
 
 keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
 
@@ -124,8 +125,9 @@ require("lazy").setup({
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
-			{ "williamboman/mason.nvim", config = true },
+			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			{ "j-hui/fidget.nvim", opts = {} },
 			"folke/neodev.nvim",
 		},
@@ -137,13 +139,15 @@ require("lazy").setup({
 			{
 				"L3MON4D3/LuaSnip",
 				build = (function()
-					if vim.fn.has("win32") == 1 then
-						return
-					end
+					-- if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
+					-- 	return
+					-- end
 					return "make install_jsregexp"
 				end)(),
 			},
+			"saadparwaiz1/cmp_luasnip",
 			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-path",
 			-- Adds a number of user-friendly snippets
 			"rafamadriz/friendly-snippets",
