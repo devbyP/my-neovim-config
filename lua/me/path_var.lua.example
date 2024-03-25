@@ -1,0 +1,5 @@
+local p = {}
+p.vue_ts_path = "/opt/homebrew/lib/node_modules/@vue/typescript-plugin"
+p.ts_global = "/opt/homebrew/lib/node_modules/typescript/lib"
+
+return p

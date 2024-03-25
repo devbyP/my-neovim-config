@@ -65,6 +65,26 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
 require("mason").setup()
+local p = require("me.path_var")
+
+-- local util = require("lspconfig.util")
+-- local function get_typescript_server_path(root_dir)
+-- 	local global_ts = p.global_ts
+-- 	-- Alternative location if installed as root:
+-- 	-- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
+-- 	local found_ts = ""
+-- 		found_ts = util.path.join(path, "node_modules", "typescript", "lib")
+-- 	local function check_dir(path)
+-- 		if util.path.exists(found_ts) then
+-- 			return path
+-- 		end
+-- 	end
+-- 	if util.search_ancestors(root_dir, check_dir) then
+-- 		return found_ts
+-- 	else
+-- 		return global_ts
+-- 	end
+-- end
 
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -79,7 +99,25 @@ local servers = {
 	gopls = {},
 	-- pyright = {},
 	-- rust_analyzer = {},
-	tsserver = {},
+	tsserver = {
+		init_options = {
+			plugins = {
+				{
+					name = "@vue/typescript-plugin",
+					location = p.vue_ts_path,
+					-- location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+					languages = { "javascript", "typescript", "vue" },
+				},
+			},
+		},
+		filetypes = {
+			"typescript",
+			"javascript",
+			"javascriptreact",
+			"typescriptreact",
+			"vue",
+		},
+	},
 	-- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
 	lua_ls = {
@@ -90,7 +128,18 @@ local servers = {
 			-- diagnostics = { disable = { 'missing-fields' } },
 		},
 	},
-	volar = {},
+	volar = {
+		-- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+		-- root_dir = util.root_pattern("package.json"),
+		-- init_options = {
+		-- 	vue = {
+		-- 		hybridMode = false,
+		-- 	},
+		-- 	typescript = {
+		-- 		tsdk = get_typescript_server_path(vim.fn.getcwd()),
+		-- 	},
+		-- },
+	},
 }
 
 -- Setup neovim lua configuration
@@ -111,15 +160,16 @@ require("mason-lspconfig").setup({
 	handlers = {
 		function(server_name)
 			local server = servers[server_name] or {}
-			require("lspconfig")[server_name].setup({
-				cmd = server.cmd,
-				settings = server.settings,
-				filetypes = server.filetypes,
-				-- This handles overriding only values explicitly passed
-				-- by the server configuration above. Useful when disabling
-				-- certain features of an LSP (for example, turning off formatting for tsserver)
-				capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {}),
-			})
+			require("lspconfig")[server_name].setup(server)
+			-- require("lspconfig")[server_name].setup({
+			-- 	cmd = server.cmd,
+			-- 	settings = server.settings,
+			-- 	filetypes = server.filetypes,
+			-- 	-- This handles overriding only values explicitly passed
+			-- 	-- by the server configuration above. Useful when disabling
+			-- 	-- certain features of an LSP (for example, turning off formatting for tsserver)
+			-- 	capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {}),
+			-- })
 		end,
 	},
 })
