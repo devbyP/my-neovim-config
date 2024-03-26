@@ -1,3 +1,4 @@
-/plugin
-/lua/me/path_var.lua
+lua/me/vars/db-ui.lua
+lua/me/vars/vue-ts-loc.lua
 
+dbsave

@@ -65,11 +65,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
 require("mason").setup()
-local p = require("me.path_var")
+local var_vue_ts = require("me.vars.vue-ts-loc")
 
 -- local util = require("lspconfig.util")
 -- local function get_typescript_server_path(root_dir)
--- 	local global_ts = p.global_ts
+-- 	local global_ts = var_vue_ts.global_typescript_loc
 -- 	-- Alternative location if installed as root:
 -- 	-- local global_ts = '/usr/local/lib/node_modules/typescript/lib'
 -- 	local found_ts = ""
@@ -104,8 +104,7 @@ local servers = {
 			plugins = {
 				{
 					name = "@vue/typescript-plugin",
-					location = p.vue_ts_path,
-					-- location = "/usr/local/lib/node_modules/@vue/typescript-plugin",
+					location = var_vue_ts.vue_ts_plugin_loc,
 					languages = { "javascript", "typescript", "vue" },
 				},
 			},
