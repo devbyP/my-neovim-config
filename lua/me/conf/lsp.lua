@@ -142,6 +142,7 @@ local servers = {
 		-- 	},
 		-- },
 	},
+	angularls = {},
 }
 
 -- Setup neovim lua configuration
@@ -162,6 +163,7 @@ require("mason-lspconfig").setup({
 	handlers = {
 		function(server_name)
 			local server = servers[server_name] or {}
+			server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
 			require("lspconfig")[server_name].setup(server)
 			-- require("lspconfig")[server_name].setup({
 			-- 	cmd = server.cmd,
@@ -224,7 +226,16 @@ cmp.setup({
 		{ name = "nvim_lsp" },
 		{ name = "luasnip" },
 		{ name = "path" },
+		{ name = "buffer" },
+	},
+})
+cmp.setup.filetype({ "sql" }, {
+	sources = {
+		{ name = "vim-dadbod-completion" },
+		{ name = "buffer" },
 	},
 })
 
 require("luasnip.loaders.from_vscode").lazy_load()
+
+vim.g.node_host_prog = "/home/pui/.local/share/nvm/v20.12.0/bin/node"

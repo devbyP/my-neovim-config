@@ -46,10 +46,6 @@ o.timeoutlen = 300
 o.splitright = true
 o.splitbelow = true
 
--- disable netrw for nvim tree
-g.loaded_netrw = 1
-g.loaded_netrwPlugin = 1
-
 opt.colorcolumn = "100"
 -- wo.cursorline = true
 
@@ -118,9 +114,6 @@ require("lazy").setup({
 	"tpope/vim-rhubarb",
 
 	"tpope/vim-sleuth",
-	{
-		"nvim-tree/nvim-tree.lua",
-	},
 
 	{
 		"neovim/nvim-lspconfig",
@@ -278,6 +271,7 @@ require("lazy").setup({
 		},
 		build = "TSUpdate",
 	},
+	"nvim-treesitter/nvim-treesitter-context",
 
 	{ import = "me.plugins" },
 }, {})
@@ -285,6 +279,14 @@ require("lazy").setup({
 require("me.conf.telescope")
 require("me.conf.treesitter")
 require("me.conf.lsp")
+
+vim.filetype.add({
+	extension = {
+		templ = "templ",
+	},
+})
+
+require("me.gui.neovide")
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=4 sts=4 sw=4 et

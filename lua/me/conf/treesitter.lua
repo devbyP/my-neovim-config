@@ -18,6 +18,7 @@ vim.defer_fn(function()
 			"vimdoc",
 			"vim",
 			"bash",
+			"templ",
 		},
 
 		-- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
