@@ -29,19 +29,19 @@ o.smartcase = true
 o.autoindent = true
 o.tabstop = 4
 o.shiftwidth = 0
+o.expandtab = true
 o.softtabstop = -1 -- use shiftwidth, set to negative
 o.wrap = false
 
 opt.list = true
 opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
-opt.undofile = true
 
 o.scrolloff = 8
 
 o.completeopt = "menuone,noselect"
 
 o.updatetime = 250
-o.timeoutlen = 300
+o.timeoutlen = 500
 
 o.splitright = true
 o.splitbelow = true
