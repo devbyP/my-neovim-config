@@ -1,6 +1,27 @@
 -- Enable telescope fzf native, if installed
 pcall(require("telescope").load_extension, "fzf")
 
+local actions = require("telescope.actions")
+
+require("telescope").setup({
+	defaults = {
+		mappings = {
+			i = {
+				["<esc>"] = actions.close,
+			},
+		},
+		path_display = { "truncate" },
+	},
+	pickers = {
+		live_grep = {
+			theme = "ivy",
+		},
+		lsp_references = {
+			theme = "ivy",
+		},
+	},
+})
+
 -- Telescope live_grep in git root
 -- Function to find the git root directory based on the current buffer's path
 local function find_git_root()
