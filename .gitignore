@@ -1,4 +1,4 @@
-lua/me/vars/db-ui.lua
-lua/me/vars/vue-ts-loc.lua
+lua/me/vars/*.lua
+!lua/me/vars/*.example.lua
 
 dbsave

@@ -239,4 +239,6 @@ cmp.setup.filetype({ "sql" }, {
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
-vim.g.node_host_prog = "/home/pui/.local/share/nvm/v20.12.0/bin/node"
+local var_lsp_node = require("me.vars.lsp")
+
+vim.g.node_host_prog = var_lsp_node.lsp_config_node_path
