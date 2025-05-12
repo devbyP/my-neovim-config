@@ -2,3 +2,4 @@ lua/me/vars/*.lua
 !lua/me/vars/*.example.lua
 
 dbsave
+assets
