@@ -1,5 +1,5 @@
 if vim.g.neovide then
-  vim.o.guifont = 'FiraCode Nerd Font Mono,Courier MonoThai:h14'
+  vim.o.guifont = 'Ubuntu Mono:h14,Noto Sans Thai:h14'
   vim.wo.cursorline = true
   vim.g.neovide_cursor_vfx_mode = 'railgun'
   vim.g.neovide_hide_mouse_when_typing = true

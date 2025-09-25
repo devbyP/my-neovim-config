@@ -12,6 +12,31 @@ vim.g.have_nerd_font = true
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
+-- Set encoding for proper UTF-8 support (including Thai)
+vim.opt.encoding = 'utf-8'
+vim.opt.fileencoding = 'utf-8'
+vim.opt.fileencodings = 'utf-8,ucs-bom,gb18030,gbk,gb2312,cp936'
+
+-- Thai language specific settings
+vim.opt.ambiwidth = 'single' -- Handle ambiguous width characters
+vim.opt.emoji = false -- Disable emoji rendering that might interfere
+
+-- Unicode combining character support
+vim.opt.maxcombine = 6 -- Maximum number of combining characters
+vim.cmd 'set termguicolors' -- Enable 24-bit RGB color in terminal
+
+-- Set language and locale for proper Thai handling
+-- Use available locale, fallback to C.UTF-8 if en_US.UTF-8 not available
+local ok, _ = pcall(vim.cmd, 'language messages en_US.UTF-8')
+if not ok then
+  pcall(vim.cmd, 'language messages C.UTF-8')
+end
+
+-- Force proper Unicode display
+vim.cmd 'set display+=uhex' -- Show unprintable characters as hex
+vim.cmd 'set linespace=0' -- Ensure proper line spacing for combining chars
+-- Note: termencoding is not supported in Neovim (always UTF-8)
+
 -- Make line numbers default
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
@@ -45,9 +70,11 @@ end)
 -- break indent is when add new line the cursor still on the same indent as a line before.
 vim.opt.breakindent = true
 
+-- warn when there are unsaved changes
+vim.opt.swapfile = false
+
 -- Save undo history
--- off undofile use undotree plugin instead
-vim.opt.undofile = false
+vim.opt.undofile = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
@@ -80,6 +107,9 @@ vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
+
+-- for nvim obsidian ui feature
+vim.opt.conceallevel = 0
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -192,6 +222,40 @@ require('lazy').setup({
     },
   },
 })
+
+-- Configure combining character handling
+vim.opt.maxcombine = 6
+
+-- Ensure proper display of Unicode characters
+vim.cmd 'set display+=uhex'
+
+-- Set proper terminal colors for Unicode
+if vim.fn.has 'termguicolors' == 1 then
+  vim.cmd 'set termguicolors'
+end
+
+-- Create autocmd to ensure proper Thai rendering
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*',
+  callback = function()
+    -- Check if file contains Thai characters
+    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+    for _, line in ipairs(lines) do
+      if line:match '[\u{0E00}-\u{0E7F}]' then
+        -- Thai characters detected, ensure proper settings
+        vim.bo.fileencoding = 'utf-8'
+        break
+      end
+    end
+  end,
+  desc = 'Auto-detect Thai content and set proper encoding',
+})
+
+-- Add command to reload with proper encoding
+vim.api.nvim_create_user_command('ThaiReload', function()
+  vim.cmd 'e ++enc=utf-8'
+  print 'Reloaded with UTF-8 encoding'
+end, { desc = 'Reload file with UTF-8 encoding for Thai text' })
 
 require 'gui.neovide'
 
