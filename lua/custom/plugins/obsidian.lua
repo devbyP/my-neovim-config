@@ -34,7 +34,8 @@ return {
       time_format = '%H:%M',
       extension = '.md',
     },
-
-    -- see below for full list of options 👇
+    ui = {
+      enable = false,
+    },
   },
 }

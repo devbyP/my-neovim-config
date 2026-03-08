@@ -40,6 +40,7 @@ return { -- Autoformat
       typescript = { 'prettierd', 'prettier', stop_after_first = true },
       vue = { 'prettierd', 'prettier', stop_after_first = true },
       json = { 'jq', 'prettierd', 'prettier', stop_after_first = true },
+      sql = { 'sqlfmt' },
     },
   },
 }

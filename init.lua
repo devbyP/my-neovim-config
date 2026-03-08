@@ -234,29 +234,6 @@ if vim.fn.has 'termguicolors' == 1 then
   vim.cmd 'set termguicolors'
 end
 
--- Create autocmd to ensure proper Thai rendering
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = '*',
-  callback = function()
-    -- Check if file contains Thai characters
-    local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-    for _, line in ipairs(lines) do
-      if line:match '[\u{0E00}-\u{0E7F}]' then
-        -- Thai characters detected, ensure proper settings
-        vim.bo.fileencoding = 'utf-8'
-        break
-      end
-    end
-  end,
-  desc = 'Auto-detect Thai content and set proper encoding',
-})
-
--- Add command to reload with proper encoding
-vim.api.nvim_create_user_command('ThaiReload', function()
-  vim.cmd 'e ++enc=utf-8'
-  print 'Reloaded with UTF-8 encoding'
-end, { desc = 'Reload file with UTF-8 encoding for Thai text' })
-
 require 'gui.neovide'
 
 -- The line beneath this is called `modeline`. See `:help modeline`
