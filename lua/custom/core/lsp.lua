@@ -196,6 +196,24 @@ return {
       },
       --
 
+      sqls = {
+        -- sqls needs database connections for full diagnostics; without them it
+        -- still provides syntax checking. Add connections via a workspace config
+        -- file (.sqls.yml) or set them here:
+        -- settings = {
+        --   sqls = {
+        --     connections = {
+        --       { driver = 'postgresql', dataSourceName = 'host=127.0.0.1 ... dbname=mydb' },
+        --     },
+        --   },
+        -- },
+        on_attach = function(client, _)
+          -- Disable sqls formatting — conform/sqlfmt handles it
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end,
+      },
+
       lua_ls = {
         -- cmd = { ... },
         -- filetypes = { ... },

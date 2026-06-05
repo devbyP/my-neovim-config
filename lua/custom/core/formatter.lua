@@ -25,8 +25,9 @@ return { -- Autoformat
       else
         lsp_format_opt = 'fallback'
       end
+      local timeout = vim.bo[bufnr].filetype == 'sql' and 3000 or 500
       return {
-        timeout_ms = 500,
+        timeout_ms = timeout,
         lsp_format = lsp_format_opt,
       }
     end,
