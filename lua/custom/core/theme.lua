@@ -1,12 +1,12 @@
 return {
   -- 'catppuccin/nvim',
-  -- 'folke/tokyonight.nvim',
-  'tiagovla/tokyodark.nvim',
+  'folke/tokyonight.nvim',
+  -- 'tiagovla/tokyodark.nvim',
   priority = 1000,
   init = function()
     -- vim.cmd.colorscheme 'catppuccin-latte'
-    -- vim.cmd.colorscheme 'tokyonight-day'
-    vim.cmd.colorscheme 'tokyodark'
+    vim.cmd.colorscheme 'tokyonight'
+    -- vim.cmd.colorscheme 'tokyodark'
 
     -- You can configure highlights by doing something like:
     -- vim.cmd.hi 'Comment gui=none'

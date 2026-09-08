@@ -160,7 +160,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-vim.env.PATH = '~/.local/share/nvm/v22.11.0/bin' .. vim.env.PATH
+vim.env.PATH = vim.fn.expand '~/.local/share/nvm/v22.11.0/bin' .. ':' .. vim.env.PATH
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
